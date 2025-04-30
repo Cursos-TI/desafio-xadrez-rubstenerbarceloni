@@ -1,32 +1,66 @@
 #include <stdio.h>
 
-// Desafio de Xadrez - MateCheck
-// Este código inicial serve como base para o desenvolvimento do sistema de movimentação das peças de xadrez.
-// O objetivo é utilizar estruturas de repetição e funções para determinar os limites de movimentação dentro do jogo.
+#define TAMANHO_TABULEIRO 10
+#define TAMANHO_NAVIO 3
+#define AGUA 0
+#define NAVIO 3
 
 int main() {
-    // Nível Novato - Movimentação das Peças
-    // Sugestão: Declare variáveis constantes para representar o número de casas que cada peça pode se mover.
+    // Declaração da matriz que representa o tabuleiro (10x10)
+    int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO];
 
-    // Implementação de Movimentação do Bispo
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação do Bispo em diagonal.
+    // Inicializa todas as posições do tabuleiro com 0 (água)
+    for (int i = 0; i < TAMANHO_TABULEIRO; i++) {
+        for (int j = 0; j < TAMANHO_TABULEIRO; j++) {
+            tabuleiro[i][j] = AGUA;
+        }
+    }
 
-    // Implementação de Movimentação da Torre
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação da Torre para a direita.
+    // Coordenadas iniciais dos navios (definidas no código)
+    int linhaHorizontal = 2; // linha para o navio horizontal
+    int colunaHorizontal = 4; // coluna inicial
+    int linhaVertical = 6; // linha inicial
+    int colunaVertical = 7; // coluna para o navio vertical
 
-    // Implementação de Movimentação da Rainha
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação da Rainha para a esquerda.
+    // Verificação se os navios estão dentro dos limites do tabuleiro
+    if (colunaHorizontal + TAMANHO_NAVIO <= TAMANHO_TABULEIRO &&
+        linhaVertical + TAMANHO_NAVIO <= TAMANHO_TABULEIRO) {
 
-    // Nível Aventureiro - Movimentação do Cavalo
-    // Sugestão: Utilize loops aninhados para simular a movimentação do Cavalo em L.
-    // Um loop pode representar a movimentação horizontal e outro vertical.
+        // Posiciona navio horizontal (na linha fixa, colunas consecutivas)
+        for (int i = 0; i < TAMANHO_NAVIO; i++) {
+            tabuleiro[linhaHorizontal][colunaHorizontal + i] = NAVIO;
+        }
 
-    // Nível Mestre - Funções Recursivas e Loops Aninhados
-    // Sugestão: Substitua as movimentações das peças por funções recursivas.
-    // Exemplo: Crie uma função recursiva para o movimento do Bispo.
+        // Posiciona navio vertical (na coluna fixa, linhas consecutivas)
+        int sobreposicao = 0;
+        for (int i = 0; i < TAMANHO_NAVIO; i++) {
+            if (tabuleiro[linhaVertical + i][colunaVertical] == NAVIO) {
+                sobreposicao = 1;
+                break;
+            }
+        }
 
-    // Sugestão: Implemente a movimentação do Cavalo utilizando loops com variáveis múltiplas e condições avançadas.
-    // Inclua o uso de continue e break dentro dos loops.
+        if (!sobreposicao) {
+            for (int i = 0; i < TAMANHO_NAVIO; i++) {
+                tabuleiro[linhaVertical + i][colunaVertical] = NAVIO;
+            }
+        } else {
+            printf("Erro: Sobreposição de navios detectada!\n");
+            return 1;
+        }
+    } else {
+        printf("Erro: Coordenadas fora dos limites do tabuleiro.\n");
+        return 1;
+    }
+
+    // Exibe o tabuleiro
+    printf("Tabuleiro Batalha Naval:\n");
+    for (int i = 0; i < TAMANHO_TABULEIRO; i++) {
+        for (int j = 0; j < TAMANHO_TABULEIRO; j++) {
+            printf("%d ", tabuleiro[i][j]);
+        }
+        printf("\n");
+    }
 
     return 0;
 }
