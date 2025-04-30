@@ -1,64 +1,49 @@
-#include <stdio.h>
-
-#define TAMANHO_TABULEIRO 10
-#define TAMANHO_NAVIO 3
-#define AGUA 0
-#define NAVIO 3
+#include <stdio.h> 
 
 int main() {
-    // Declaração da matriz que representa o tabuleiro (10x10)
-    int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO];
+    
+      
+    // A Torre se move em linha reta (horizontal ou vertical).
+    // 5 casas para a direita.
+    printf("Movimento da Torre (5 casas para a direita):\n");
 
-    // Inicializa todas as posições do tabuleiro com 0 (água)
-    for (int i = 0; i < TAMANHO_TABULEIRO; i++) {
-        for (int j = 0; j < TAMANHO_TABULEIRO; j++) {
-            tabuleiro[i][j] = AGUA;
-        }
+    
+    for (int i = 1; i <= 5; i++) {
+        printf("Direita\n");  // Imprime a direção a cada passo
     }
 
-    // Coordenadas iniciais dos navios (definidas no código)
-    int linhaHorizontal = 2; // linha para o navio horizontal
-    int colunaHorizontal = 4; // coluna inicial
-    int linhaVertical = 6; // linha inicial
-    int colunaVertical = 7; // coluna para o navio vertical
+    printf("\n");  
+    
+    // Movimento do BISPO usando estrutura while
+    
+    // O Bispo se move na diagonal.
+    
+    printf("Movimento do Bispo (5 casas na diagonal para cima e à direita):\n");
 
-    // Verificação se os navios estão dentro dos limites do tabuleiro
-    if (colunaHorizontal + TAMANHO_NAVIO <= TAMANHO_TABULEIRO &&
-        linhaVertical + TAMANHO_NAVIO <= TAMANHO_TABULEIRO) {
-
-        // Posiciona navio horizontal (na linha fixa, colunas consecutivas)
-        for (int i = 0; i < TAMANHO_NAVIO; i++) {
-            tabuleiro[linhaHorizontal][colunaHorizontal + i] = NAVIO;
-        }
-
-        // Posiciona navio vertical (na coluna fixa, linhas consecutivas)
-        int sobreposicao = 0;
-        for (int i = 0; i < TAMANHO_NAVIO; i++) {
-            if (tabuleiro[linhaVertical + i][colunaVertical] == NAVIO) {
-                sobreposicao = 1;
-                break;
-            }
-        }
-
-        if (!sobreposicao) {
-            for (int i = 0; i < TAMANHO_NAVIO; i++) {
-                tabuleiro[linhaVertical + i][colunaVertical] = NAVIO;
-            }
-        } else {
-            printf("Erro: Sobreposição de navios detectada!\n");
-            return 1;
-        }
-    } else {
-        printf("Erro: Coordenadas fora dos limites do tabuleiro.\n");
-        return 1;
+    int j = 1;  
+    while (j <= 5) { 
+        printf("Cima, Direita\n");  
+        j++;  
     }
 
-    // Exibe o tabuleiro
-    printf("Tabuleiro Batalha Naval:\n");
-    for (int i = 0; i < TAMANHO_TABULEIRO; i++) {
-        for (int j = 0; j < TAMANHO_TABULEIRO; j++) {
-            printf("%d ", tabuleiro[i][j]);
-        }
+    printf("\n");
+    
+    // Movimento da RAINHA usando estrutura do-while
+    
+    // A Rainha se move em qualquer direção.
+ 
+    printf("Movimento da Rainha (8 casas para a esquerda):\n");
+
+    int k = 1; 
+    do {
+        printf("Esquerda\n");  
+        k++;  
+    } while (k <= 8);  /
+
+  
+    return 0;
+}
+
         printf("\n");
     }
 
